@@ -42,11 +42,11 @@ public class ProductController {
     }
 
     @DeleteMapping("/deleteById/{productId}")
-    public ResponseEntity<Void> deleteProductById(@PathVariable Integer productId){
+    public ResponseEntity<Void> deleteProductById(@PathVariable Integer productId) {
         try {
             personService.deleteById(productId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
