@@ -29,9 +29,18 @@ public class ProductService {
     }
 
     public Product getProductById(Integer productId) {
-        Optional <Product> requestedProduct = productRepository.findById(productId);
-        if (requestedProduct.isPresent()){
+        Optional<Product> requestedProduct = productRepository.findById(productId);
+        if (requestedProduct.isPresent()) {
             return requestedProduct.get();
+        } else {
+            throw new IllegalArgumentException("Person with id " + productId + " not found.");
+        }
+    }
+
+    public void deleteById(Integer productId) {
+        Optional<Product> requestedProduct = productRepository.findById(productId);
+        if (requestedProduct.isPresent()) {
+            productRepository.deleteById(productId);
         } else {
             throw new IllegalArgumentException("Person with id " + productId + " not found.");
         }

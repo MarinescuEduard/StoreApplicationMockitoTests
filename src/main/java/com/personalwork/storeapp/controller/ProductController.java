@@ -36,8 +36,18 @@ public class ProductController {
         try {
             Product selectedProduct = personService.getProductById(productId);
             return ResponseEntity.ok(selectedProduct);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/deleteById/{productId}")
+    public ResponseEntity<Void> deleteProductById(@PathVariable Integer productId){
+        try {
+            personService.deleteById(productId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (IllegalArgumentException e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        }
     }
+}
